@@ -88,14 +88,11 @@ public class Animal {
         int choice = input.nextInt();
         switch(choice){
             case 1:
-                TicTacToe ttt = new TicTacToe();
-                ttt.main(null);
-                int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //calculating points
-                pet.setPoints(p1); //setting points
+                Main ttt = new Main();
+                Main.main(null);
+                int p1 = pet.updatePoints(pet.getPoints(), ttt.getfinalScore()); //adding previous points with new points
+                System.out.println();
                 int l1 = pet.levelUpAnimal(pet.getPoints());
-                pet.setLevel(l1);
-                pet.printAnimal();
-
                 break;
             case 2:
                 newHangman hang = new newHangman();
