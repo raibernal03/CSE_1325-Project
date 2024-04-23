@@ -1,24 +1,24 @@
 # CSE 1325 Final Project
 
-This project is a set of mini games which earn you points to level up a virtual pet.
+A virtual pet game where you use mini games to earn points to level up your pet. 
 
 the three mini games are:
 
 1. Hangman.Hangman (word guessing game)
 1. Tick Tack Toe
-1. Rock, Paper, Scissors (random number game)
+1. Rock Paper Scissors (random number game)
 
-Each of these games will have at least two difficulties, and you will be able to earn points from winning the games
+Some of the games have several difficulties, and some do not.  
 
 ## Game Descriptions
 
 ### Hangman.Hangman (HM)
 
-There will be a word bank where we will pull from and the user will input different letters to see which would match the word. When the user thinks they know the word they will have a chance to enter the entire word.
+A word guessing game, where we pull a word from a file and have the user guess either the whole letter or the whole word. They have 7 lives, and can earn from 3-5 points
 
 #### difficulty level:
 
-Will be determined by the length of the word
+Will be determined by the length of the word. The three different difficulties are: 4-5 letter, 6-7 letters, 8-9 letters. 
 
 ### Tick Tack Toe (TTT)
 
@@ -34,7 +34,7 @@ there will be two difficulties
 
 ### Rock Paper Scissors (RPS)
 
-Classic RPS game, best out of three wins
+Classic Rock Paper Scissors.    each game you win gets you a single point. 
 
 ---
 
