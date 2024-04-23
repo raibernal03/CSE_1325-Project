@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class newHangman {
 
-    public int hmanPoitns;
 
 
     //class variables
