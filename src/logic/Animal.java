@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Animal {
     public String name;
     public int level;
-    public int points = 0;
+    public int points;
 
     public Animal(){}
 
@@ -35,37 +35,41 @@ public class Animal {
         return points;
     }
 
-    public void setPoints(int newPoints) {
-        this.points =  points;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     //*Level Up Pet
-   public int levelUpAnimal(int level, int points, int newPoints){
-        int finalPoints = points + newPoints;
+    public int levelUpAnimal(int newPoints){
+
         //Level 0: points < 25
-        if(finalPoints < 25){
-            this.level = 0;
+        if(newPoints < 25){
+            setLevel(0);
         }
         //Level 1: points < 50 && points > 25
-        else if(finalPoints < 50 && finalPoints < 75){
-            this.level = 1;
+        else if(newPoints < 50 && newPoints < 75){
+            setLevel(1);
         }
         //Level 2: points < 75 && points > 50
-        else if(finalPoints < 75 && finalPoints < 100){
-            this.level = 2;
+        else if(newPoints < 75 && newPoints < 100){
+            setLevel(2);
         }
         //Level 3: points < 100 && points > 75
-        else if(finalPoints < 100 && finalPoints < 150){
-            this.level = 3;
+        else if(newPoints < 100 && newPoints < 150){
+            setLevel(3);
         }
-        return level;
+        return getLevel();
     }
-
+    public int updatePoints(int points, int newPoints){
+        int finalPoints = points + newPoints;
+        setPoints(finalPoints);
+        return getPoints();
+    }
     //*Print Pet
     public void printAnimal(){
-        System.out.println("Pet Name: " + name);
-        System.out.println("Pet Level: " + level);
-        System.out.println("Points: " + points);
+        System.out.println("Pet Name: " + getName());
+        System.out.println("Pet Level: " + getLevel());
+        System.out.println("Points: " + getPoints());
     }
     public static void main(String[] args) {
         System.out.println("Welcome to Reptile Arcade");
@@ -79,27 +83,32 @@ public class Animal {
         System.out.println("\tPoints: " + pet.getPoints());
         System.out.println();
 
-        System.out.println("To level up your pet you'll have to gather points from the following games: \n \t\tTicTacToe [1] \n \t\tHangman [3]\n \t\tRock Paper Scissors[3]");
+        System.out.println("To level up your pet you'll have to gather points from the following games: \n \t\tTicTacToe [1] \n \t\tHangman [2]\n \t\tRock Paper Scissors[3]");
         System.out.print("\t\tGame#: ");
         int choice = input.nextInt();
         switch(choice){
             case 1:
                 TicTacToe ttt = new TicTacToe();
                 ttt.main(null);
+                int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //calculating points
+                pet.setPoints(p1); //setting points
+                int l1 = pet.levelUpAnimal(pet.getPoints());
+                pet.setLevel(l1);
+                pet.printAnimal();
 
-                int l = pet.levelUpAnimal(pet.getLevel(), pet.getPoints(), ttt.getTotalScore());//will calculate the level based on old points and new points from game
-                pet.setLevel(l); // updates level
-                pet.printAnimal(); // Prints animal statistics
                 break;
             case 2:
-                Hangman hang = new Hangman();
+                newHangman hang = new newHangman();
                 hang.main(null);
 
                 break;
             case 3:
                 RPS rps = new RPS();
-                rps.main(null);
-                
+                RPS.main(null);
+                int p3 = pet.updatePoints(pet.getPoints(), rps.getfinalScore()); //adding previous points with new points
+
+                System.out.println();
+                int l3 = pet.levelUpAnimal(pet.getPoints());
                 break;
             default:
                 break;

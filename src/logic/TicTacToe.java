@@ -51,6 +51,7 @@ public class TicTacToe {
         }
 
         System.out.println("All levels completed! Total Score: " + getTotalScore());
+        
         scanner.close();
     }
 

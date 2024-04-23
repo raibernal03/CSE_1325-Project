@@ -3,9 +3,10 @@ package logic;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class RPS
 {
-
+    public static int totalScore;
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
@@ -44,13 +45,29 @@ public class RPS
         }
 
         System.out.println("Total Score: " + finalScore);
+        setfinalScore(finalScore);
         scanner.close();
     }
+    // set final score
+    public static void setfinalScore(int finalScore)
+    {
+        totalScore = finalScore;
+    }
+    // get final score
+    public static int getfinalScore()
+    {
+        return totalScore;
+    }
+
+
+
+
     // checks players move is valid
     public static String getPlayerMove(Scanner scanner)
     {
         String playerMove;
-        while (true) {
+        while (true)
+        {
             System.out.println("Please enter your move (Rock, Paper, or Scissors): ");
             playerMove = scanner.nextLine();
             if (playerMove.equals("Rock") || playerMove.equals("Paper") || playerMove.equals("Scissors"))
@@ -61,6 +78,7 @@ public class RPS
         }
         return playerMove;
     }
+
     // play again?
     public static boolean playAgain(Scanner scanner)
     {
@@ -70,3 +88,4 @@ public class RPS
 
     }
 }
+
