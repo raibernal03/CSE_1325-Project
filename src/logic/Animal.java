@@ -90,7 +90,7 @@ public class Animal {
             case 1:
                 Main ttt = new Main();
                 Main.main(null);
-                int p1 = pet.updatePoints(pet.getPoints(), ttt.getfinalScore()); //adding previous points with new points
+                int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //adding previous points with new points
                 System.out.println();
                 int l1 = pet.levelUpAnimal(pet.getPoints());
                 break;
