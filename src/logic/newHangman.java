@@ -12,6 +12,14 @@ public class newHangman {
 
     public int totalPoints;
 
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
     //class variables
     String word; // the word the user needs to guess
     int level;  // sets the level of the game ( basically how long the word is)
@@ -66,6 +74,7 @@ public class newHangman {
 
         scan.close();
         System.out.println("in firstGame: the total points you earned is: " + this.points);
+        setTotalPoints(this.points);
     }
 
     /* asks user if they want to quit or what level they want to play at */
@@ -79,9 +88,8 @@ public class newHangman {
         switch (choice) {
             case 0:
                 System.out.println("the total points you earned is: "+newMan.points+"\nExiting...");
-                System.exit(0);                
-                break;
-        
+                return;
+
             case 1:
                 newMan.level = choice;
                 break;
@@ -95,10 +103,7 @@ public class newHangman {
                 break;
 
             default:
-                System.out.print("What you entered was not an option.");
-                System.out.println(" As punishment, you'll play on the hardest setting"); 
-                newMan.level = 3;
-                break;
+                return;
         }
    
     } // end of menu
@@ -130,7 +135,7 @@ public class newHangman {
             default: //level 1
                 System.out.println("ERROR:: No level found. Defaulting to level 1");
                 newMan.level = 1;
-                fileName = "4or5LtrWrd.txt";
+                fileName = "src/logic/4or5LtrWrd.txt";
                 break;
         }
 
@@ -195,8 +200,7 @@ public class newHangman {
         switch (choice) {
             case 0: // quit
                 System.out.println("the total points you earned is: "+newMan.points+"\nExiting...");
-                System.exit(0);                
-                break;
+                return;
 
             case 1: // guess letter
                 guessLetter(newMan, scan);                
@@ -333,16 +337,19 @@ public class newHangman {
         System.out.println("        /|\\");
         this.reset();
         this.replay(scan);
+
     }
 
     public void addPoints(){
         this.points = (this.level + 2) + this.points;
-        totalPoints = this.points;
+        //totalPoints = this.points;
+        setTotalPoints(this.points);
     }
 
     public void subtractPoints(){
         this.points = (-1 * (this.level + 2)) + this.points;
-        totalPoints = this.points;
+        //totalPoints = this.points;
+        setTotalPoints(this.points);
     }
 
 

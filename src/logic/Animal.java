@@ -73,45 +73,66 @@ public class Animal {
         System.out.println("Points: " + getPoints());
     }
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
         System.out.println("Welcome to Reptile Arcade");
         System.out.println("Well start by creating your pet ");
         Animal pet = new Animal();
-        Scanner input = new Scanner(System.in);
         //Initiazion of Pet
         System.out.print("\tPet Name: ");
         pet.setName(input.nextLine());
         System.out.println("\tPet Level: "+ pet.getLevel());
         System.out.println("\tPoints: " + pet.getPoints());
-        System.out.println();
+        int playing = 0;
+        Scanner input2 = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("***********************************************************************");
+            System.out.println();
+            System.out.println("\t\t\tMAIN MENU");
+            System.out.println("Choose a game to level up " + pet.getName() + ": \n \t\tTicTacToe [1] \n \t\tHangman [2]\n \t\tRock Paper Scissors[3]\n \t\tQuit[4] ");
+            System.out.print("\t\tGame#: ");
+            choice = input2.nextInt();
 
-        System.out.println("To level up your pet you'll have to gather points from the following games: \n \t\tTicTacToe [1] \n \t\tHangman [2]\n \t\tRock Paper Scissors[3]");
-        System.out.print("\t\tGame#: ");
-        int choice = input.nextInt();
-        switch(choice){
-            case 1:
-                Main ttt = new Main();
-                Main.main(null);
-                int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //adding previous points with new points
-                System.out.println();
-                int l1 = pet.levelUpAnimal(pet.getPoints());
-                pet.printAnimal();
-                break;
-            case 2:
-                newHangman hang = new newHangman();
-                hang.main(null);
+            switch(choice){
+                case 1:
+                    Main ttt = new Main();
+                    Main.main(null);
+                    int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //adding previous points with new points
+                    System.out.println();
+                    int l1 = pet.levelUpAnimal(pet.getPoints());
+                    pet.printAnimal();
+                    break;
+                case 2:
+                    newHangman hang = new newHangman();
+                    hang.main(null);
+                    int p2 = pet.updatePoints(pet.getPoints(), hang.getTotalPoints());
+                    System.out.println("Hangman Points: "+ hang.getTotalPoints());
+                    System.out.println("Animal Points: "+ pet.getPoints());
+                    break;
+                case 3:
+                    RPS rps = new RPS();
+                    RPS.main(null);
+                    int p3 = pet.updatePoints(pet.getPoints(), rps.getfinalScore()); //adding previous points with new points
+                    int l3 = pet.levelUpAnimal(pet.getPoints());
+                    pet.printAnimal();
+                    break;
+//                case 4:
+//                    playing = 1;
+//                    input.close();
+//                    input2.close();
+//                        break;
+                default:
+                    playing = 1;
+                    input.close();
+                    input2.close();
+                    break;
+            }
 
-                break;
-            case 3:
-                RPS rps = new RPS();
-                RPS.main(null);
-                int p3 = pet.updatePoints(pet.getPoints(), rps.getfinalScore()); //adding previous points with new points
+        }while (playing == 0);
 
-                System.out.println();
-                int l3 = pet.levelUpAnimal(pet.getPoints());
-                break;
-            default:
-                break;
-        }
+        System.out.println("GOOD BYE🦎🦎");
+        pet.printAnimal();
 
     }
 }
