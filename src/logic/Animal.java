@@ -94,12 +94,12 @@ public class Animal {
             case 2:
                 Hangman hang = new Hangman();
                 hang.main(null);
-                //hang.returnPoints();
+
                 break;
             case 3:
                 RPS rps = new RPS();
                 rps.main(null);
-                //loops for neg point
+                
                 break;
             default:
                 break;
