@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class newHangman {
 
-
+    public int totalPoints;
 
     //class variables
     String word; // the word the user needs to guess
@@ -65,8 +65,7 @@ public class newHangman {
         gameMenu(this, scan);          
 
         scan.close();
-        System.out.println("the total points you earned is: " + this.points);
-        returnPoints(this);
+        System.out.println("in firstGame: the total points you earned is: " + this.points);
     }
 
     /* asks user if they want to quit or what level they want to play at */
@@ -80,7 +79,6 @@ public class newHangman {
         switch (choice) {
             case 0:
                 System.out.println("the total points you earned is: "+newMan.points+"\nExiting...");
-                newMan.returnPoints(newMan);
                 System.exit(0);                
                 break;
         
@@ -174,9 +172,10 @@ public class newHangman {
     // asks user if they want to quit, guess a letter or the whole word
     public static void gameMenu(newHangman newMan, Scanner scan){
 
+        // checks if you're out of lives, and subtracts points
         if(newMan.lives == 0){
             System.err.println("Wahh wahh, you're out of lives. The word was: " + newMan.word + ". Better luck next time");
-            newMan.points = (-1 * (newMan.level + 2)) + newMan.points;
+            newMan.subtractPoints();
             System.out.println("You now have " + newMan.points + " points.");
             newMan.reset();
             newMan.replay(scan);
@@ -196,7 +195,6 @@ public class newHangman {
         switch (choice) {
             case 0: // quit
                 System.out.println("the total points you earned is: "+newMan.points+"\nExiting...");
-                newMan.returnPoints(newMan);
                 System.exit(0);                
                 break;
 
@@ -223,7 +221,6 @@ public class newHangman {
         String RESET = "\u001B[0m";
         String RED = "\u001B[31m";
         String GREEN = "\u001B[32m";
-        String CYAN = "\u001B[36m";        
         
         // 1) get letter from user
         System.out.println("Enter a letter:");
@@ -263,13 +260,7 @@ public class newHangman {
             String newGWrd = new String(tempGWrd);
             newMan.gWrd = newGWrd;
             if( newGWrd.equals(newMan.word)){
-                newMan.points = (newMan.level + 2) + newMan.points;
-                System.out.println("        \\|/");
-                System.out.println( CYAN + "Congrats you won!! the word was: " + newGWrd);
-                System.out.println("you now have " + newMan.points + " points" + RESET);
-                System.out.println("        /|\\");
-                newMan.reset();
-                newMan.replay(scan);
+               newMan.winGame(scan);
             }
             else{
                 System.out.println("the updated word is: " + newMan.gWrd);
@@ -283,20 +274,13 @@ public class newHangman {
     public static void guessWholeWord(newHangman newMan, Scanner scan){
         String RESET = "\u001B[0m";
         String RED = "\u001B[31m";
-        String CYAN = "\u001B[36m";   
 
         System.out.println("Enter the full word: ");
         String guess = scan.next().toLowerCase();
         
         // the word was right
         if(guess.equals(newMan.word)){
-            newMan.points = (newMan.level + 2) + newMan.points;
-            System.out.println("        \\|/");
-            System.out.println(CYAN + "You got it! the word was " + newMan.word);
-            System.out.println("You got " + newMan.points + " points" + RESET);
-            System.out.println("        /|\\");
-            newMan.reset();
-            newMan.replay(scan);
+            newMan.winGame(scan);
         }
         else{ // the word was wrong
             System.out.println(RED + " " + guess + " was not the word, sorry.");
@@ -334,9 +318,34 @@ public class newHangman {
         gameMenu(this, scan);
     }
     
-    public int returnPoints(newHangman newMan){
-        return newMan.points;
+    // adds points, prints out winning message, and resets game
+    public void winGame(Scanner scan){
+        //for colored output
+        String RESET = "\u001B[0m";
+        String CYAN = "\u001B[36m"; 
+
+
+        this.addPoints();
+
+        System.out.println("        \\|/");
+        System.out.println(CYAN + "You got it! the word was " + this.word);
+        System.out.println("You got " + this.points + " points" + RESET);
+        System.out.println("        /|\\");
+        this.reset();
+        this.replay(scan);
     }
+
+    public void addPoints(){
+        this.points = (this.level + 2) + this.points;
+        totalPoints = this.points;
+    }
+
+    public void subtractPoints(){
+        this.points = (-1 * (this.level + 2)) + this.points;
+        totalPoints = this.points;
+    }
+
+
 
  
 
