@@ -67,7 +67,8 @@ public class Animal {
     }
     //*Print Pet
     public void printAnimal(){
-        System.out.println("Pet Name: " + getName());
+
+        System.out.println(getName() + " current stats: ");
         System.out.println("Pet Level: " + getLevel());
         System.out.println("Points: " + getPoints());
     }
@@ -93,6 +94,7 @@ public class Animal {
                 int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //adding previous points with new points
                 System.out.println();
                 int l1 = pet.levelUpAnimal(pet.getPoints());
+                pet.printAnimal();
                 break;
             case 2:
                 newHangman hang = new newHangman();

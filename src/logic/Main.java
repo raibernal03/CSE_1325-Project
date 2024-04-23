@@ -39,6 +39,7 @@ public class Main {
                         if (currentLevel > 3) {
                             System.out.println("All levels completed! Total Score: " + getTotalScore());
                             scanner.close();
+                            setTotalScore(totalScore);
                             return;  // End the game if all levels are completed
                         }
                         System.out.println("Advancing to next level!");
