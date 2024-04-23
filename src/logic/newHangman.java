@@ -16,8 +16,8 @@ public class newHangman {
         return totalPoints;
     }
 
-    public void setTotalPoints(int totalPoints) {
-        this.totalPoints = totalPoints;
+    public static void setTotalPoints(int totalPoints) {
+        totalPoints = totalPoints;
     }
 
     //class variables
@@ -26,8 +26,15 @@ public class newHangman {
     int lives; // they get 7 lives/ changces to guess
     String gWrd; // the word that the user has guessed so far. Will be the same as Word at the end of the game (if the user won) 
     String gAlphabet; // the list of letters that have been guessed 
-    int points; // the points the user gets to level up their virtual pet
+    public int points; // the points the user gets to level up their virtual pet
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     // constuctor, to set inital values
     newHangman(){
@@ -88,6 +95,7 @@ public class newHangman {
         switch (choice) {
             case 0:
                 System.out.println("the total points you earned is: "+newMan.points+"\nExiting...");
+                setTotalPoints(newMan.points);
                 return;
 
             case 1:
@@ -200,6 +208,7 @@ public class newHangman {
         switch (choice) {
             case 0: // quit
                 System.out.println("the total points you earned is: "+newMan.points+"\nExiting...");
+                setTotalPoints(newMan.getPoints());
                 return;
 
             case 1: // guess letter
@@ -341,15 +350,17 @@ public class newHangman {
     }
 
     public void addPoints(){
-        this.points = (this.level + 2) + this.points;
+        int p = (getPoints() + 2) + getPoints();
+        setPoints(p);
         //totalPoints = this.points;
-        setTotalPoints(this.points);
+        setTotalPoints(getPoints());
     }
 
     public void subtractPoints(){
-        this.points = (-1 * (this.level + 2)) + this.points;
+        int p = (-1 * (this.level + 2)) + getPoints();
         //totalPoints = this.points;
-        setTotalPoints(this.points);
+        setPoints(p);
+        setTotalPoints(getPoints());
     }
 
 
