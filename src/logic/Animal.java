@@ -1,8 +1,13 @@
 package logic;
 
 import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
 
 public class Animal {
+    static Scanner sc = new Scanner(System.in);
     public String name;
     public int level;
     public int points;
@@ -75,17 +80,14 @@ public class Animal {
         System.out.println("Pet Level: " + getLevel());
         System.out.println("Points: " + getPoints());
     }
-
     //*PLAYING METHOD
     public static void mainMenu(Animal pet){
-        Scanner input = new Scanner(System.in);
-        int choice;
         System.out.println("***********************************************************************");
         System.out.println();
         System.out.println("\t\t\tMAIN MENU");
         System.out.println("Choose a game to level up " + pet.getName() + ": \n \t\tTicTacToe [1] \n \t\tHangman [2]\n \t\tRock Paper Scissors[3]\n \t\tQuit[4] ");
-        System.out.println("\t\tInput#: ");
-        choice = input.nextInt();
+        System.out.print("\tInput: ");
+        int choice = sc.nextInt();
 
         switch (choice) {
             case 1:
@@ -101,20 +103,18 @@ public class Animal {
                 mainMenu(pet);
                 break;
             default:
-                input.close();
                 break;
         }
 
     }
     //**PLAYING TTT
     public static void ticTacToe(Animal pet) {
-        Main ttt = new Main();
-        Main.main(null);
+        TicTacToe ttt = new TicTacToe();
+        TicTacToe.main(null);
         int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //adding previous points with new points
         int l1 = pet.levelUpAnimal(pet.getPoints());
         pet.printAnimal();
         mainMenu(pet);
-        return;
     }
     //**PLAYING HANGMAN
     public static void hangMan(Animal pet) {
@@ -125,7 +125,6 @@ public class Animal {
         System.out.println("Animal Points: " + pet.getPoints());
         pet.printAnimal();
         mainMenu(pet);
-        return;
     }
     //**PLAYING RPS
     public static void rockPaperScissors(Animal pet) {
@@ -141,30 +140,26 @@ public class Animal {
         mainMenu(pet);
     }
 
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
 
         System.out.println("Welcome to Reptile Arcade");
         System.out.println("Well start by creating your pet ");
         Animal animal = new Animal();
         //Initiazion of Pet
         System.out.print("\tPet Name: ");
-        animal.setName(input.nextLine());
+        animal.setName(sc.next());
         System.out.println("\tPet Level: " + animal.getLevel());
         System.out.println("\tPoints: " + animal.getPoints());
         System.out.println("READY TO START [y/n]: ");
-        char start = input.next().charAt(0);
+        char start = sc.next().charAt(0);
         if (start == 'y'){
             mainMenu(animal);
-        }else {
-            System.out.println("🦎🦎🦎🦎");
-        }
+        }else {}
 
+        sc.close();
 
-        System.out.println("GOOD BYE🦎🦎");
+        System.out.println("🦎GOOD BYE🦎");
         animal.printAnimal();
 
     }
 }
-

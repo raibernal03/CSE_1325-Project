@@ -4,7 +4,7 @@ package logic;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
+public class TicTacToe {
     // Constants for the game
     private static final int BOARD_SIZE = 3;  // Size of the game board
     private static final char[][] board = new char[BOARD_SIZE][BOARD_SIZE];  // Game board
