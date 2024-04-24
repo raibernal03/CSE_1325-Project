@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class newHangman {
+public class Hangman {
 
     public int totalPoints;
 
@@ -36,16 +36,16 @@ public class newHangman {
         this.points = points;
     }
 
-    // constuctor, to set inital values
-    newHangman(){
-        points = 0;
-        lives = 7;
-        gWrd = "_____"; 
-        gAlphabet = " ";
+    //! what im guessing is wrong is the constructor.
+    Hangman(){
+        this.points = 0;
+        this.lives = 7;
+        this.gWrd = "_____";
+        this.gAlphabet = " ";
     }
 
     public static void main(String[] args) {
-        newHangman newMan = new newHangman();
+        Hangman newMan = new Hangman();
         newMan.firstGame();
     } //end of main
 
@@ -80,12 +80,12 @@ public class newHangman {
         gameMenu(this, scan);          
 
         scan.close();
-        System.out.println("in firstGame: the total points you earned is: " + this.points);
-        setTotalPoints(this.points);
+        System.out.println("in firstGame: the total points you earned is: " + getPoints());
+        setTotalPoints(getPoints());
     }
 
     /* asks user if they want to quit or what level they want to play at */
-    public static void menu(newHangman newMan, Scanner scan){
+    public static void menu(Hangman newMan, Scanner scan){
 
         // quits or sets the game level
         System.out.println("\t\tmenu option: \n0) quit game \n1) Play Game (level 1)");
@@ -117,7 +117,7 @@ public class newHangman {
     } // end of menu
     
     // gets the Word the user will guess from a file and saves it in the Hangman var 
-    public static void getWord(newHangman newMan) throws IOException{
+    public static void getWord(Hangman newMan) throws IOException{
         /* generates the hangman word that the user guesses
          * 1) choose the correst file for the user's level
          * 2) saves all the words from the file in an arrayList wordList
@@ -171,7 +171,7 @@ public class newHangman {
 
 
     // sets the guessed word to all blanks
-    public static void setGWord(newHangman newMan){
+    public static void setGWord(Hangman newMan){
         
         newMan.gWrd = "";
         for(int i =0; i < newMan.word.length(); i++){
@@ -183,7 +183,7 @@ public class newHangman {
 /*-------------------------------- starting the game -------------------------- */
 
     // asks user if they want to quit, guess a letter or the whole word
-    public static void gameMenu(newHangman newMan, Scanner scan){
+    public static void gameMenu(Hangman newMan, Scanner scan){
 
         // checks if you're out of lives, and subtracts points
         if(newMan.lives == 0){
@@ -208,7 +208,7 @@ public class newHangman {
         switch (choice) {
             case 0: // quit
                 System.out.println("the total points you earned is: "+newMan.points+"\nExiting...");
-                setTotalPoints(newMan.getPoints());
+                setTotalPoints(newMan.points);
                 return;
 
             case 1: // guess letter
@@ -229,7 +229,7 @@ public class newHangman {
     } // end of game menu
 
     // checks if the letter entered is in the word
-    public static void guessLetter(newHangman newMan, Scanner scan ) {
+    public static void guessLetter(Hangman newMan, Scanner scan ) {
         // vars for colored terminal output
         String RESET = "\u001B[0m";
         String RED = "\u001B[31m";
@@ -284,7 +284,7 @@ public class newHangman {
     }//end of guessLetter
 
     // allows user to guess the whole word
-    public static void guessWholeWord(newHangman newMan, Scanner scan){
+    public static void guessWholeWord(Hangman newMan, Scanner scan){
         String RESET = "\u001B[0m";
         String RED = "\u001B[31m";
 
@@ -303,7 +303,7 @@ public class newHangman {
         }
     } // end of guessWholeWord
 
-    public void removeLife(newHangman newMan){
+    public void removeLife(Hangman newMan){
         newMan.lives = (newMan.lives - 1);
     }
 
@@ -342,7 +342,8 @@ public class newHangman {
 
         System.out.println("        \\|/");
         System.out.println(CYAN + "You got it! the word was " + this.word);
-        System.out.println("You got " + this.points + " points" + RESET);
+        setTotalPoints(getPoints());
+        System.out.println("You got " + getPoints() + " points" + RESET);
         System.out.println("        /|\\");
         this.reset();
         this.replay(scan);
@@ -350,21 +351,20 @@ public class newHangman {
     }
 
     public void addPoints(){
-        int p = (getPoints() + 2) + getPoints();
+//        int p = (getPoints() + 2) + getPoints();
+//        setPoints(p);
+//        //totalPoints = this.points;
+//        setTotalPoints(getPoints());
+        int p;
+        p = getPoints() + 2;
         setPoints(p);
-        //totalPoints = this.points;
-        setTotalPoints(getPoints());
     }
 
     public void subtractPoints(){
-        int p = (-1 * (this.level + 2)) + getPoints();
-        //totalPoints = this.points;
+        /*int p = (-1 * (this.level + 2)) + getPoints();
+        totalPoints = this.points;*/
+        int p = getPoints() - 2;
         setPoints(p);
-        setTotalPoints(getPoints());
+
     }
-
-
-
- 
-
 }

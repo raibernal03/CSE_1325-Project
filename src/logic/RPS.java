@@ -4,11 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class RPS
-{
+public class RPS {
     public static int totalScore;
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int finalScore = 0;
 
@@ -48,23 +47,21 @@ public class RPS
         setfinalScore(finalScore);
         scanner.close();
     }
+
     // set final score
     public static void setfinalScore(int finalScore)
     {
         totalScore = finalScore;
     }
+
     // get final score
     public static int getfinalScore()
     {
         return totalScore;
     }
 
-
-
-
     // checks players move is valid
-    public static String getPlayerMove(Scanner scanner)
-    {
+    public static String getPlayerMove(Scanner scanner) {
         String playerMove;
         while (true)
         {
@@ -80,8 +77,7 @@ public class RPS
     }
 
     // play again?
-    public static boolean playAgain(Scanner scanner)
-    {
+    public static boolean playAgain(Scanner scanner) {
         System.out.println("Play again? (Yes or No)");
         String playAgain = scanner.nextLine();
         return playAgain.equalsIgnoreCase("Yes") || playAgain.equalsIgnoreCase("Y");
