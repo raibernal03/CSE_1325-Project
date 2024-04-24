@@ -166,9 +166,8 @@ public class Animal {
         char start = sc.next().charAt(0);
         if (start == 'y') {
             mainMenu(animal);
-        } else {
         }
-        mainMenu(animal);
+//        mainMenu(animal);
 
         System.out.println("🦎GOOD BYE🦎");
         animal.printAnimal();
