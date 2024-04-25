@@ -2,8 +2,6 @@ package logic;
 
 import java.util.Random;
 import java.util.Scanner;
-
-
 public class RPS {
     public static int totalScore;
 
