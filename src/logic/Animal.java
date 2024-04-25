@@ -3,7 +3,7 @@ package logic;
 import java.util.Scanner;
 
 public class Animal {
-    //static Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
     public String name;
     public int level;
@@ -87,7 +87,7 @@ public class Animal {
         //pet.printAnimal();
     }
 
-    public static void mainMenu(Animal pet) {
+    static void mainMenu(Animal pet, int choice) {
 
         System.out.println("\n🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎");
         System.out.println("\n\t\t\tMAIN MENU");
@@ -97,40 +97,33 @@ public class Animal {
         System.out.println("\t3. Rock Paper Scissors");
         System.out.println("\t4. Print "+ pet.getName()+ " stats" );
         System.out.println("\t5. Quit");
-        Scanner in = new Scanner(System.in);
+        System.out.println("current choice: " + choice);
+        //Scanner in = new Scanner(System.in);
+        //in.next();
         //System.out.print("\tInput: ");
-        int choice = in.nextInt();
-        switch (choice) {
-            case 1:
-                ticTacToe(pet);
-                mainMenu(pet);
-                break;
-            case 2:
-                hangMan(pet);
-                mainMenu(pet);
-                break;
-            case 3:
-                rockPaperScissors(pet);
-                mainMenu(pet);
-                break;
-            case 4:
-                printAnimal(pet);
-                mainMenu(pet);
-            case 5:
-                System.out.println("Goodbye!");
-                in.close();
-                break;
-            default:
-                System.out.println("Invalid choice. Please choose again.\n\n");
-                mainMenu(pet);
-                break;
+        //int choice = sc.nextInt();
+        if (choice == 1) {
+            ticTacToe(pet);
         }
-
+        else if (choice == 2) {
+            hangMan(pet);
+        }
+        else if (choice == 3) {
+            rockPaperScissors(pet);
+        }
+        else if (choice == 4) {
+            printAnimal(pet);
+        }
+        else if (choice == 5) {
+            System.out.println("🦎GOOD BYE🦎");
+            printAnimal(pet);
+            System.exit(0);
+        }
     }
 
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+       // Scanner sc = new Scanner(System.in);
         System.out.println("\t\t\t\t🦎🦎Welcome to Reptile Arcade🦎🦎");
         System.out.println("\t\t\t\tLet's start by creating your pet ");
         Animal animal = new Animal();
@@ -141,8 +134,14 @@ public class Animal {
         animal.setLevel(0); // You may set the initial level here.
         System.out.println("\tPoints: " + animal.getPoints());
         animal.setPoints(0); // You may set the initial points here.
-        mainMenu(animal);
-
+        mainMenu(animal,3 );
+        System.out.println("");
+        while(sc.hasNext())
+            sc.next();
+        mainMenu(animal, 2);
+        System.out.println("");
+        mainMenu(animal, 1);
+        System.out.println("");
         System.out.println("🦎 GOOD BYE 🦎");
         animal.printAnimal(animal);
         sc.close(); // Closing the Scanner here after it's done being used.

@@ -80,6 +80,7 @@ public class Hangman {
         gameMenu(this, scan);          
 
         scan.close();
+
         System.out.println("in firstGame: the total points you earned is: " + getPoints());
         setTotalPoints(getPoints());
     }
