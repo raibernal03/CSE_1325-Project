@@ -1,28 +1,16 @@
 package logic;
 
 import java.util.Scanner;
-import java.lang.*;
 
 public class Animal {
-    static Scanner sc = new Scanner(System.in);
+    //static Scanner sc = new Scanner(System.in);
 
     public String name;
-
     public int level;
-
     public int points;
 
     public Animal() {
     }
-
-    /*
-
-    public Animal(String name, int level, int points) {
-        this.name = name;
-        this.level = level;
-        this.points = points;
-    }
-    */
 
     public String getName() {
         return name;
@@ -48,131 +36,134 @@ public class Animal {
         this.points = points;
     }
 
-    //*Level Up Pet
     public int levelUpAnimal(int newPoints) {
-
-        //Level 0: points < 25
         if (newPoints < 25) {
-            setLevel(0);
-        }
-        //Level 1: points < 50 && points > 25
-        else if (newPoints < 50 && newPoints < 75) {
-            setLevel(1);
-        }
-        //Level 2: points < 75 && points > 50
-        else if (newPoints < 75 && newPoints < 100) {
-            setLevel(2);
-        }
-        //Level 3: points < 100 && points > 75
-        else if (newPoints < 100 && newPoints < 150) {
-            setLevel(3);
+            return 0;
+        } else if (newPoints < 50) {
+            return 1;
+        } else if (newPoints < 75) {
+            return 2;
+        } else if (newPoints < 100) {
+            return 3;
         }
         return getLevel();
     }
 
-    //*Updating the points
     public int updatePoints(int points, int newPoints) {
         int finalPoints = points + newPoints;
-        setPoints(finalPoints); //sets final points to the sum
+        setPoints(finalPoints);
         return getPoints();
     }
 
-    //*Print Pet
-    public void printAnimal() {
+    public static void printAnimal(Animal pet) {
         System.out.println("\n\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E");
-        System.out.println("\t\t"+getName() + " current stats: "); //prints pet name
-        System.out.println("\t\tPet Level = " + getLevel()); //prints pet level
-        System.out.println("\t\tPoints = " + getPoints()); // prints points
+        System.out.println("\t\t" + pet.getName() + " current stats: ");
+        System.out.println("\t\tPet Level = " + pet.getLevel());
+        System.out.println("\t\tPoints = " + pet.getPoints());
         System.out.println("\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\n");
     }
 
-    //*PLAYING METHOD
     public static void mainMenu(Animal pet) {
-        System.out.println("***********************************************************************");
-        System.out.println();
-        System.out.println("\t\t\tMAIN MENU");
-        System.out.println("Choose a game to level up " + pet.getName() + ": \n \t\tTicTacToe [1] \n \t\tHangman [2]\n \t\tRock Paper Scissors[3]\n \t\tQuit[4] ");
 
-        System.out.print("\tInput: ");
-        int choice = sc.nextInt();
-
-
+        System.out.println("\n🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎");
+        System.out.println("\n\t\t\tMAIN MENU");
+        System.out.println("Choose a game to level up " + pet.getName() + ":");
+        System.out.println("\tA. Tic Tac Toe");
+        System.out.println("\tB. Hangman");
+        System.out.println("\tC. Rock Paper Scissors");
+        System.out.println("\tD. Print "+ pet.getName()+ " stats" );
+        System.out.println("\tE. Quit");
+        Scanner in = new Scanner(System.in);
+        //System.out.print("\tInput: ");
+        String choice = in.nextLine();
         switch (choice) {
-            case 1:
-                ticTacToe(pet); //Calls Tic Tac Toe method
-                mainMenu(pet); //Loops back to main menu
+            case "A":
+                ticTacToe(pet);
+                mainMenu(pet);
                 break;
-            case 2:
-                hangMan(pet); //Calls Hangman method
-                mainMenu(pet); //Loops back to main menu
+            case "B":
+                hangMan(pet);
+                mainMenu(pet);
                 break;
-            case 3:
-                rockPaperScissors(pet); //Calls RPS method
-                mainMenu(pet); //Loops back to the main menu
+            case "C":
+                rockPaperScissors(pet);
+                mainMenu(pet);
+                break;
+            case "D":
+                printAnimal(pet);
+                mainMenu(pet);
+            case "E":
+                System.out.println("Goodbye!");
+                in.close();
                 break;
             default:
-                break; // ends loops if user wants to exit
+                System.out.println("Invalid choice. Please choose again.\n\n");
+                mainMenu(pet);
+                break;
         }
 
     }
 
-    //**PLAYING TTT
     public static void ticTacToe(Animal pet) {
-        TicTacToe ttt = new TicTacToe(); //Creates new TTT class
-        TicTacToe.main(null); //Calls TTT main method to start TT game
-        int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //Updating Pet points
-        int l1 = pet.levelUpAnimal(pet.getPoints()); // Updating level based of on the new total of points
-        pet.printAnimal(); // Prints new animal stats
-//        mainMenu(pet);
+        TicTacToe ttt = new TicTacToe();
+        ttt.main(null);
+        int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore());
+        int l1 = pet.levelUpAnimal(p1);
+        //pet.printAnimal();
     }
 
-    //**PLAYING HANGMAN
     public static void hangMan(Animal pet) {
-        Hangman hang = new Hangman(); // Creates new Hangman game Object
-        hang.main(null); // Calls main function to start game
-        int p2 = pet.updatePoints(pet.getPoints(), hang.getTotalPoints()); // updates points based of finale score
-        System.out.println("Hangman Points: " + hang.getTotalPoints());
-        System.out.println("Animal Points: " + pet.getPoints());
-        pet.printAnimal(); // Prints new pet stats
-
-//        mainMenu(pet);
+        Hangman hang = new Hangman();
+        hang.main(null);
+        int p2 = pet.updatePoints(pet.getPoints(), hang.getTotalPoints());
+        //pet.printAnimal();
     }
 
-    //**PLAYING RPS
     public static void rockPaperScissors(Animal pet) {
-        RPS rps = new RPS();// Creates new RPS game object
-        rps.main(null); // Calls main function of RPS game
-        //going back to game until it scores higher than 0
-        if (pet.getPoints() < 0) {
-            rps.main(null);
-        }
-        int p3 = pet.updatePoints(pet.getPoints(), rps.getfinalScore()); //Updates points base of final score
-        int l3 = pet.levelUpAnimal(pet.getPoints());// Updates level based of points gained
-        pet.printAnimal(); //Prints new Pet statistics
-//        mainMenu(pet);
+        RPS rps = new RPS();
+        rps.main(null);
+        int p3 = pet.updatePoints(pet.getPoints(), rps.getfinalScore());
+        int l3 = pet.levelUpAnimal(p3);
+        //pet.printAnimal();
     }
 
-    public static void main(String[] args) {
-
-        System.out.println("Welcome to Reptile Arcade");
-        System.out.println("Well start by creating your pet ");
-        Animal animal = new Animal();
-        //Initiazion of Pet
-        System.out.print("\tPet Name: ");
-        animal.setName(sc.next());
-        System.out.println("\tPet Level: " + animal.getLevel());
-        System.out.println("\tPoints: " + animal.getPoints());
-        System.out.print("READY TO START [y/n]: ");
-        char start = sc.next().charAt(0);
-        if (start == 'y') {
-            mainMenu(animal);
+    /*public static char choice() {
+        Scanner in = new Scanner(System.in);
+        String input = "";
+        while (input.isEmpty()) {
+            System.out.print("\tInput: ");
+            if (in.hasNextLine()) {
+                input = in.nextLine().trim();
+            } else {
+                // If there is no next line available, wait for user input
+                try {
+                    Thread.sleep(100); // Sleep for a short period to avoid busy waiting
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (input.isEmpty()) {
+                System.out.println("Invalid input. Please enter a valid choice.");
+            }
         }
-//        mainMenu(animal);
+        return input.toUpperCase().charAt(0);
+    }*/
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\t\t\t\t🦎🦎Welcome to Reptile Arcade🦎🦎");
+        System.out.println("\t\t\t\tLet's start by creating your pet ");
+        Animal animal = new Animal();
 
-        System.out.println("🦎GOOD BYE🦎");
-        animal.printAnimal();
-        sc.close();
+        System.out.print("\t\t\t\t\tPet Name: ");
+        animal.setName(sc.nextLine());
+        System.out.println("\tPet Level: " + animal.getLevel());
+        animal.setLevel(0); // You may set the initial level here.
+        System.out.println("\tPoints: " + animal.getPoints());
+        animal.setPoints(0); // You may set the initial points here.
+        mainMenu(animal);
 
-
+        System.out.println("🦎 GOOD BYE 🦎");
+        animal.printAnimal(animal);
+        sc.close(); // Closing the Scanner here after it's done being used.
     }
 }
