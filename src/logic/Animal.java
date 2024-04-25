@@ -136,8 +136,8 @@ public class Animal {
         animal.setPoints(0); // You may set the initial points here.
         mainMenu(animal,3 );
         System.out.println("");
-        while(sc.hasNext())
-            sc.next();
+        while(sc.hasNext()){
+            sc.next();}
         mainMenu(animal, 2);
         System.out.println("");
         mainMenu(animal, 1);
