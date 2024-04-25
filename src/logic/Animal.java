@@ -12,6 +12,7 @@ public class Animal {
     public Animal() {
     }
 
+    //getters and setters
     public String getName() {
         return name;
     }
@@ -32,10 +33,11 @@ public class Animal {
         return points;
     }
 
+
     public void setPoints(int points) {
         this.points = points;
     }
-
+    //levels up the pet based of the points the pet/user currently has
     public int levelUpAnimal(int newPoints) {
         if (newPoints < 25) {
             return 0;
@@ -48,6 +50,7 @@ public class Animal {
         }
         return getLevel();
     }
+    //sums the old points and the new points adn assigns it to the overall points
 
     public int updatePoints(int points, int newPoints) {
         int finalPoints = points + newPoints;
@@ -55,6 +58,7 @@ public class Animal {
         return getPoints();
     }
 
+    //prints animal stats(points and level)
     public static void printAnimal(Animal pet) {
         System.out.println("\n\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E");
         System.out.println("\t\t" + pet.getName() + " current stats: ");
@@ -63,11 +67,10 @@ public class Animal {
         System.out.println("\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\n");
     }
 
-
     public static void ticTacToe(Animal pet) {
         TicTacToe ttt = new TicTacToe();
         ttt.main(null);
-        int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore());
+        int p1 = pet.updatePoints(pet.getPoints(), ttt.getTotalScore()); //gets score/points
         int l1 = pet.levelUpAnimal(p1);
         //pet.printAnimal();
     }
@@ -87,7 +90,7 @@ public class Animal {
         //pet.printAnimal();
     }
 
-    static void mainMenu(Animal pet, int choice) {
+    static void mainMenu(Animal pet, Scanner sc) {
 
         System.out.println("\n🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎");
         System.out.println("\n\t\t\tMAIN MENU");
@@ -97,11 +100,11 @@ public class Animal {
         System.out.println("\t3. Rock Paper Scissors");
         System.out.println("\t4. Print "+ pet.getName()+ " stats" );
         System.out.println("\t5. Quit");
-        System.out.println("current choice: " + choice);
+        //System.out.println("current choice: " + choice);
         //Scanner in = new Scanner(System.in);
         //in.next();
-        //System.out.print("\tInput: ");
-        //int choice = sc.nextInt();
+        System.out.print("\tInput: ");
+        int choice = sc.nextInt();
         if (choice == 1) {
             ticTacToe(pet);
         }
@@ -134,13 +137,13 @@ public class Animal {
         animal.setLevel(0); // You may set the initial level here.
         System.out.println("\tPoints: " + animal.getPoints());
         animal.setPoints(0); // You may set the initial points here.
-        mainMenu(animal,3 );
+        mainMenu(animal,sc );
         System.out.println("");
         while(sc.hasNext()){
             sc.next();}
-        mainMenu(animal, 2);
+        mainMenu(animal, sc);
         System.out.println("");
-        mainMenu(animal, 1);
+        mainMenu(animal, sc);
         System.out.println("");
         System.out.println("🦎 GOOD BYE 🦎");
         animal.printAnimal(animal);
