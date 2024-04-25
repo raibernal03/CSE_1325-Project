@@ -63,46 +63,6 @@ public class Animal {
         System.out.println("\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\uD83E\uDD8E\n");
     }
 
-    public static void mainMenu(Animal pet) {
-
-        System.out.println("\n🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎");
-        System.out.println("\n\t\t\tMAIN MENU");
-        System.out.println("Choose a game to level up " + pet.getName() + ":");
-        System.out.println("\tA. Tic Tac Toe");
-        System.out.println("\tB. Hangman");
-        System.out.println("\tC. Rock Paper Scissors");
-        System.out.println("\tD. Print "+ pet.getName()+ " stats" );
-        System.out.println("\tE. Quit");
-        Scanner in = new Scanner(System.in);
-        //System.out.print("\tInput: ");
-        String choice = in.nextLine();
-        switch (choice) {
-            case "A":
-                ticTacToe(pet);
-                mainMenu(pet);
-                break;
-            case "B":
-                hangMan(pet);
-                mainMenu(pet);
-                break;
-            case "C":
-                rockPaperScissors(pet);
-                mainMenu(pet);
-                break;
-            case "D":
-                printAnimal(pet);
-                mainMenu(pet);
-            case "E":
-                System.out.println("Goodbye!");
-                in.close();
-                break;
-            default:
-                System.out.println("Invalid choice. Please choose again.\n\n");
-                mainMenu(pet);
-                break;
-        }
-
-    }
 
     public static void ticTacToe(Animal pet) {
         TicTacToe ttt = new TicTacToe();
@@ -127,27 +87,48 @@ public class Animal {
         //pet.printAnimal();
     }
 
-    /*public static char choice() {
+    public static void mainMenu(Animal pet) {
+
+        System.out.println("\n🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎");
+        System.out.println("\n\t\t\tMAIN MENU");
+        System.out.println("Choose a game to level up " + pet.getName() + ":");
+        System.out.println("\t1. Tic Tac Toe");
+        System.out.println("\t2. Hangman");
+        System.out.println("\t3. Rock Paper Scissors");
+        System.out.println("\t4. Print "+ pet.getName()+ " stats" );
+        System.out.println("\t5. Quit");
         Scanner in = new Scanner(System.in);
-        String input = "";
-        while (input.isEmpty()) {
-            System.out.print("\tInput: ");
-            if (in.hasNextLine()) {
-                input = in.nextLine().trim();
-            } else {
-                // If there is no next line available, wait for user input
-                try {
-                    Thread.sleep(100); // Sleep for a short period to avoid busy waiting
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (input.isEmpty()) {
-                System.out.println("Invalid input. Please enter a valid choice.");
-            }
+        //System.out.print("\tInput: ");
+        int choice = in.nextInt();
+        switch (choice) {
+            case 1:
+                ticTacToe(pet);
+                mainMenu(pet);
+                break;
+            case 2:
+                hangMan(pet);
+                mainMenu(pet);
+                break;
+            case 3:
+                rockPaperScissors(pet);
+                mainMenu(pet);
+                break;
+            case 4:
+                printAnimal(pet);
+                mainMenu(pet);
+            case 5:
+                System.out.println("Goodbye!");
+                in.close();
+                break;
+            default:
+                System.out.println("Invalid choice. Please choose again.\n\n");
+                mainMenu(pet);
+                break;
         }
-        return input.toUpperCase().charAt(0);
-    }*/
+
+    }
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\t\t\t\t🦎🦎Welcome to Reptile Arcade🦎🦎");
