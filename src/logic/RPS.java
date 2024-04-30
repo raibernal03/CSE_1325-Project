@@ -7,7 +7,7 @@ public class RPS
 {
     private static int totalScore = 0;
 
-    public static void main(String[] args)
+    public static void main(String args[])
     {
         Scanner scanner = new Scanner(System.in);
         int finalScore = 0;
@@ -68,7 +68,7 @@ public class RPS
         }
         // prints out final score
         System.out.println("Total Score: " + finalScore);
-        scanner.close();
+        //scanner.close();
     }
     public static String playRound(Scanner scanner)
     {

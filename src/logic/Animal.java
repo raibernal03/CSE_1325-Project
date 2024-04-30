@@ -3,7 +3,7 @@ package logic;
 import java.util.Scanner;
 
 public class Animal {
-    static Scanner sc = new Scanner(System.in);
+    //static Scanner sc = new Scanner(System.in);
 
     public String name;
     public int level;
@@ -33,10 +33,10 @@ public class Animal {
         return points;
     }
 
-
     public void setPoints(int points) {
         this.points = points;
     }
+
     //levels up the pet based of the points the pet/user currently has
     public int levelUpAnimal(int newPoints) {
         if (newPoints < 25) {
@@ -90,63 +90,66 @@ public class Animal {
         //pet.printAnimal();
     }
 
-    static void mainMenu(Animal pet, Scanner sc) {
-
-        System.out.println("\n🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎");
-        System.out.println("\n\t\t\tMAIN MENU");
-        System.out.println("Choose a game to level up " + pet.getName() + ":");
-        System.out.println("\t1. Tic Tac Toe");
-        System.out.println("\t2. Hangman");
-        System.out.println("\t3. Rock Paper Scissors");
-        System.out.println("\t4. Print "+ pet.getName()+ " stats" );
-        System.out.println("\t5. Quit");
-        //System.out.println("current choice: " + choice);
-        //Scanner in = new Scanner(System.in);
-        //in.next();
-        System.out.print("\tInput: ");
-        int choice = sc.nextInt();
-        if (choice == 1) {
-            ticTacToe(pet);
-        }
-        else if (choice == 2) {
-            hangMan(pet);
-        }
-        else if (choice == 3) {
-            rockPaperScissors(pet);
-        }
-        else if (choice == 4) {
-            printAnimal(pet);
-        }
-        else if (choice == 5) {
-            System.out.println("🦎GOOD BYE🦎");
-            printAnimal(pet);
-            System.exit(0);
+    public static void clearScanner(Scanner scanner) {
+        while (scanner.hasNextLine()) {
+            scanner.nextLine();
         }
     }
-
+    
 
     public static void main(String[] args) {
-       // Scanner sc = new Scanner(System.in);
-        System.out.println("\t\t\t\t🦎🦎Welcome to Reptile Arcade🦎🦎");
-        System.out.println("\t\t\t\tLet's start by creating your pet ");
+        Scanner in = new Scanner(System.in);
+        System.out.println("\t🦎🦎Welcome to Reptile Arcade🦎🦎");
+        System.out.println("Let's start by creating your pet ");
         Animal animal = new Animal();
 
-        System.out.print("\t\t\t\t\tPet Name: ");
-        animal.setName(sc.nextLine());
+        System.out.print("\tPet Name: ");
+        if (in.hasNextLine()) {
+            animal.setName(in.nextLine());
+        } else {
+            System.out.println("No input provided. Please enter a pet name.");
+            System.exit(1); // Terminate the program if no input is provided
+        }
+        //animal.setName(sc.nextLine());
         System.out.println("\tPet Level: " + animal.getLevel());
         animal.setLevel(0); // You may set the initial level here.
         System.out.println("\tPoints: " + animal.getPoints());
         animal.setPoints(0); // You may set the initial points here.
-        mainMenu(animal,sc );
-        System.out.println("");
-        while(sc.hasNext()){
-            sc.next();}
-        mainMenu(animal, sc);
-        System.out.println("");
-        mainMenu(animal, sc);
-        System.out.println("");
-        System.out.println("🦎 GOOD BYE 🦎");
-        animal.printAnimal(animal);
-        sc.close(); // Closing the Scanner here after it's done being used.
+        boolean ready = true;
+        while (ready) {
+            System.out.println("\n🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎");
+            System.out.println("MAIN MENU");
+            System.out.println("Choose a game to level up " + animal.getName() + ":");
+            System.out.println("1. Tic Tac Toe");
+            System.out.println("2. Hangman");
+            System.out.println("3. Rock Paper Scissors");
+            System.out.println("4. Print " + animal.getName() + " stats");
+            System.out.println("5. Quit");
+            int choice;
+            if(in.hasNextLine()) {
+                choice = Integer.parseInt(in.nextLine());
+            }
+            else{
+                choice = 4;
+            }
+            // Check if there's an integer available to read
+            if (choice == 1) {
+                ticTacToe(animal);
+            } else if (choice == 2) {
+                hangMan(animal);
+            } else if (choice == 3) {
+                rockPaperScissors(animal);
+            } else if (choice == 4) {
+                printAnimal(animal);
+            } else if (choice == 5) {
+                ready = false;
+                //in.close();
+                printAnimal(animal);
+                System.out.println("🦎GOOD BYE🦎");
+                System.exit(0);
+            }
+            //clearScanner(in);
+        }
     }
+
 }

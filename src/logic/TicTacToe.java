@@ -18,7 +18,7 @@ public class TicTacToe {
     private static int totalScore = 0;
 
     // Main method to start the game
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         int currentLevel = 1;  // Current level starting from 1
         int consecutiveWins = 0;  // Count of consecutive wins by the player
 
@@ -38,7 +38,7 @@ public class TicTacToe {
                         consecutiveWins = 0;  // Reset consecutive win count
                         if (currentLevel > 3) {
                             System.out.println("All levels completed! Total Score: " + getTotalScore());
-                            scanner.close();
+                            //scanner.close();
                             setTotalScore(totalScore);
                             return;  // End the game if all levels are completed
                         }

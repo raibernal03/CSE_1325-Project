@@ -44,7 +44,7 @@ public class Hangman {
         this.gAlphabet = " ";
     }
 
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         Hangman newMan = new Hangman();
         newMan.firstGame();
     } //end of main
@@ -79,7 +79,7 @@ public class Hangman {
         // starting the game   
         gameMenu(this, scan);          
 
-        scan.close();
+        //scan.close();
 
         System.out.println("in firstGame: the total points you earned is: " + getPoints());
         setTotalPoints(getPoints());
@@ -155,7 +155,7 @@ public class Hangman {
             while((line =  reader.readLine()) != null){
                 wordList.add(line);
             }
-            reader.close();
+            //reader.close();
         } catch (FileNotFoundException e) {
         
             e.printStackTrace();
@@ -184,6 +184,7 @@ public class Hangman {
 /*-------------------------------- starting the game -------------------------- */
 
     // asks user if they want to quit, guess a letter or the whole word
+
     public static void gameMenu(Hangman newMan, Scanner scan){
 
         // checks if you're out of lives, and subtracts points
